@@ -4,6 +4,21 @@ body {
 	font-size: 100%;
 }
 
+/* Wells Rock Paper Scissor Title */
+.well {
+	font-size: 28px;
+	text-align: center;
+}
+
+/* Main 3 Panels */
+ .col-xs-4 > .panel > .panel-body{
+	height: 300px;
+}
+
+#chatbox > .panel > .panel-body {
+	height: 100px;
+}
+
 .close {
     color: #aaaaaa;
     float: right;
