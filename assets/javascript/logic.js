@@ -325,23 +325,55 @@ $(document).ready(function () {
     // determine possible outcomes of RPS choices (p1 win, p2 win, tie)
     var calculateWinner = function () {
         //Player One Wins and Player Two Loses
-
+        if(player_one_choice === "Rock" && player_two_choice === "Scissor"){
+            player_one_wins++;
+            player_two_loses++;
+            playerOneWins();
+         }; 
         //Player One Loses and Player Two Wins
-
+        if(player_one_choice === "Rock" && player_two_choice === "Paper"){
+            player_one_loses++;
+            player_two_wins++;
+            playerTwoWins();
+         }; 
         //No one wins 
-
+        if(player_one_choice === "Rock" && player_two_choice === "Rock"){
+            showNoWinners();
+         }; 
         //Player One Wins and Player Two Loses
-
+        if(player_one_choice === "Paper" && player_two_choice === "Rock"){
+            player_one_wins++;
+            player_two_loses++;
+            playerOneWins();
+         };  
         //No one wins... 
-
+        if(player_one_choice === "Paper" && player_two_choice === "Paper"){
+            showNoWinners();
+         };  
         //Player One Loses and Player Two Wins
-
+        if(player_one_choice === "Paper" && player_two_choice === "Scissor"){
+            player_one_loses++;
+            player_two_wins++;
+            playerTwoWins();
+         }; 
         //No one wins... 
-
+        if(player_one_choice === "Scissor" && player_two_choice === "Scissor"){
+            showNoWinners();
+         }; 
         //Player One Wins and Player Two Loses
-
+        if(player_one_choice === "Scissor" && player_two_choice === "Paper"){
+            player_one_wins++;
+            player_two_loses++;
+            playerOneWins();
+        }; 
         //Player One Loses and Player Two Wins
-
+        if(player_one_choice === "Scissor" && player_two_choice === "Rock"){
+            player_one_loses++;
+            player_two_wins++;
+            playerTwoWins();
+        }; 
+         
+    };
         //setTimeout Function to remove data?
 
         //restart game
