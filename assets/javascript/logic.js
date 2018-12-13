@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     var player_two_name = "";
     var player_two_wins = 0;
-    var player_two_loses = 0;
+    var player_two_loss = 0;
     var player_two_choice = "";
 
     //How to join game? 
@@ -100,6 +100,7 @@ $(document).ready(function () {
         playerOneRef = gameRef.child('player0/online');
         playerTwoRef = gameRef.child('player1/online');
 
+      //*****Create a div to display info for Player One*****//
          playerOneRef.on("value", function(playerOneSnapshot){
             if(playerOneSnapshot.val() !== null){
                  
@@ -113,7 +114,7 @@ $(document).ready(function () {
                 $("#player-one-text").empty();
                 $("#player-one-text").append("Welcome " + player_one_name + " You Are Player One");
 
-        //*****Create a div to display info for Player One*****//
+  
         //div to display player one name
         var plNameText = $("<h4>");
             plNameText.text(player_one_name);
@@ -143,26 +144,49 @@ $(document).ready(function () {
 
         };
     });
-    
+
         //*****Create the div to display info for Player Two*****//
+    playerTwoRef.on("value", function(playerTwoSnapshot){
+        if(playerTwoSnapshot.val() !== null){
+            player_two_name = playerTwoSnapshot.val().Name;
+            player_two_wins = playerTwoSnapshot.val().Wins;
+            player_two_loss = playerTwoSnapshot.val().Loses;
+            player_two_choice = playerTwoSnapshot.val().Choice;
 
+            $("#submit-btn").remove(); 
+            $("#user").remove();  
+            $("#player-two-text").empty(); 
+            $("#player-two-text").append("Welcome " + player_two_name + " You Are Player Two"); 
         //div to display Player Two Name
-
-
+        var p2NameText = $("<h4>");
+            p2NameText.text(player_two_name);
+            $("#p2-name-text").html(p2NameText);
         //div to display player two rock
-
-
+        var p2RockText = $("<a href='#'>");
+            p2RockText.text("ROCK!");
+            $("#p2-rock-text").html(p2RockText);
         //div to display player two paper
-
-
+        var p2PaperText = $("<a href='#'>");
+            p2PaperText.text("PAPER!");
+            $("#p2-paper-text").html(p2PaperText);
         //div to display player two scissor
-
-
+        var p2ScissorText = $("<a href='#'>");
+            p2ScissorText.text("SCISSORS!");
+            $("#p2-scissor-text").html(p2ScissorText);
         //div to display player two wins
-
-
+        var p2NumWins = $("<h4>");
+            p2NumWins.text("Wins: ");
+            p2NumWins.append("<span class='p2Wins'>" + player_two_wins +'</span>');
+            $("#p2-wins-text").html(p2NumWins);
         //div to display player two loses
+        var p2NumLoss = $("<h4>");
+            p2NumLoss.text("Loses: ");
+            p2NumLoss.append("<span class='p2Loses'>" + player_two_loss +'</span>');
+            $("#p2-loses-text").html(p2NumLoss);
 
+        };
+    });
+}
 
         //*****Player Click Events*****//
 
