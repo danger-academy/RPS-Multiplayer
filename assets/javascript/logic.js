@@ -21,115 +21,144 @@ $(document).ready(function () {
     var player_two_choice = "";
 
     //How to join game? 
-    
+    PlayingState = {
+        Watching: 0,
+        Joining: 1,
+        Playing: 2
+    };
+
+    PlayerChoice = {
+        Rock: "Rock",
+        Paper: "Paper",
+        Scissor: "Scissor"
+    }
+
+
+    $("form").submit(function (e) {
+        playingState = PlayingState.Watching;
+        e.preventDefault();
+        playerName = $("#user").val();
+        console.log(playerName);
+        waitingToJoin();
+    });
+
+    var waitingToJoin = function () {
+        // Listen on "online" location for player 0 
+        gameRef.child("player0/online").on("value", function (snapshot) {
+            var value = snapshot.val();
+            if (value === null && playingState === PlayingState.Watching) {
+                tryingToJoin(0);
+            };
+        });
+
         // Listen on "online" location for player 0 (display as player One)
-     
+
         // Listen on "online" location for player 1 (display as player Two)
-        
+
         // Set player to join game
-        
+
 
         //If Player One disconnects, clear and make room for a new player
-   
+
 
         //If Player Two disconnects, clear and make room for a new player.
-          
+
 
         //Control the players
-        
-              
-                //*****Create a div to display info for Player One*****//
-  
-                //div to display player one name
-          
-                //div to display player one rock text
-             
-                //div to display player one paper text
-               
-                //div to display player on scissor text
-                
-                //div to display player one wins
-                
-                //div to display player one loses
-
-                //*****Create the div to display info for Player Two*****//
-  
-                //div to display Player Two Name
-                
-
-                //div to display player two rock
-           
-
-                //div to display player two paper
-               
-
-                //div to display player two scissor
-                
-
-                //div to display player two wins
 
 
-                //div to display player two loses
-             
+        //*****Create a div to display info for Player One*****//
+
+        //div to display player one name
+
+        //div to display player one rock text
+
+        //div to display player one paper text
+
+        //div to display player on scissor text
+
+        //div to display player one wins
+
+        //div to display player one loses
+
+        //*****Create the div to display info for Player Two*****//
+
+        //div to display Player Two Name
+
+
+        //div to display player two rock
+
+
+        //div to display player two paper
+
+
+        //div to display player two scissor
+
+
+        //div to display player two wins
+
+
+        //div to display player two loses
+
 
         //*****Player Click Events*****//
-        
+
 
         //describe player options
-    
+
 
         //If Player One choose Rock
-       
-        
+
+
         //If Player One choose Paper
-  
+
 
         //If Player One choose Scissor
-       
+
 
         //If Plyer Two choose Rock
-     
+
 
         //If Player Two choose Paper
-       
+
         //If Player Two choose Scissor 
-       
+
 
         //check if both players have made a selection, call calculateWinner()
-      
-            // determine possible outcomes of RPS choices (p1 win, p2 win, tie)
-  
-            //Player One Wins and Player Two Loses
-       
-            //Player One Loses and Player Two Wins
-            
-            //No one wins 
 
-            //Player One Wins and Player Two Loses
-         
-            //No one wins... 
-      
-            //Player One Loses and Player Two Wins
-   
-            //No one wins... 
+        // determine possible outcomes of RPS choices (p1 win, p2 win, tie)
 
-            //Player One Wins and Player Two Loses
-    
-            //Player One Loses and Player Two Wins
-            
+        //Player One Wins and Player Two Loses
+
+        //Player One Loses and Player Two Wins
+
+        //No one wins 
+
+        //Player One Wins and Player Two Loses
+
+        //No one wins... 
+
+        //Player One Loses and Player Two Wins
+
+        //No one wins... 
+
+        //Player One Wins and Player Two Loses
+
+        //Player One Loses and Player Two Wins
+
         //setTimeout Function to remove data?
-        
+
         //restart game
-    
 
-    //********** CHAT **********/
 
-    //submit chat text
-    
+        //********** CHAT **********/
+
+        //submit chat text
+
         //clear chat input
-     
-    //chat database functionality (how long?)
-   
-    
-    
-}); //end of document
+
+        //chat database functionality (how long?)
+
+
+
+    }); //end of document
