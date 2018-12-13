@@ -28,9 +28,9 @@ $(document).ready(function () {
     };
 
     PlayerChoice = {
-        Rock: "Rock",
-        Paper: "Paper",
-        Scissor: "Scissor"
+        Rock: "Rock!",
+        Paper: "Paper!",
+        Scissor: "Scissor!"
     }
 
 
@@ -61,13 +61,40 @@ $(document).ready(function () {
         });
     };
         // Set player to join game
+    var tryingToJoin = function(playerNum) {
+            playingState = PlayingState.Joining;
+        gameRef.child("player" + playerNum + "/online").transaction(function(snapshot){
+            if(snapshot === null) {
+                return true;
+            }else{
+                return; 
+            }
+        },function(error, committed){
+            if(committed){
+                playingState = PlayingState.Playing;
+                syncToFirebase(playerNum);
+            }else{
+                playState = PlayingState.Watching;
+            };   
+        }); 
+    }; 
 
+    var syncToFirebase = function(playerNum) {
+        var p1_pick = "";
+        var p2_pick = "";
+
+        gameRef.child('player' + playerNum + '/online').set({
+            Name: playerName,
+            Wins: playerWins,
+            Loses: playerLoses,
+            Choice: playerChoice
+        });
 
         //If Player One disconnects, clear and make room for a new player
-
+        gameRef.child("player0").child("online").onDisconnect().remove();
 
         //If Player Two disconnects, clear and make room for a new player.
-
+        gameRef.child("player1").child("online").onDisconnect().remove();    
 
         //Control the players
 
