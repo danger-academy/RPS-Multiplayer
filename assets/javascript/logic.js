@@ -381,148 +381,170 @@ $(document).ready(function () {
         playerTwoWins();
     };
 
-};
+});
 
-// display win-lose results
-var playerOneWins = function () {
-    
-    playerOneRef = gameRef.child('player0/online');
-    playerTwoRef = gameRef.child('player1/online');
+    // display win-lose results
+    var playerOneWins = function () {
 
-    playerOneRef.child('Wins').transaction(function (dataWinSnapshot) {
-        dataWinSnapshot = player_one_wins;
-        return dataWinSnapshot;
-    });
+        playerOneRef = gameRef.child('player0/online');
+        playerTwoRef = gameRef.child('player1/online');
 
-    playerTwoRef.child('Loses').transaction(function (dataLoseSnapshot) {
-        dataLoseSnapshot = player_two_loses;
-        return dataLoseSnapshot;
-    });
+        playerOneRef.child('Wins').transaction(function (dataWinSnapshot) {
+            dataWinSnapshot = player_one_wins;
+            return dataWinSnapshot;
+        });
 
-    showPlayerOneWon();
-};
+        playerTwoRef.child('Loses').transaction(function (dataLoseSnapshot) {
+            dataLoseSnapshot = player_two_loses;
+            return dataLoseSnapshot;
+        });
 
-var playerTwoWins = function () {
-    
-    playerOneRef = gameRef.child('player0/online');
-    playerTwoRef = gameRef.child('player1/online');
+        showPlayerOneWon();
+    };
 
-    playerOneRef.child('Loses').transaction(function (dataLoseSnapshot) {
-        dataLoseSnapshot = player_one_loses;
-        return dataLoseSnapshot;
-    });
+    var playerTwoWins = function () {
 
-    playerTwoRef.child('Wins').transaction(function (dataWinSnapshot) {
-        dataWinSnapshot = player_two_wins;
-        return dataWinSnapshot;
-    });
+        playerOneRef = gameRef.child('player0/online');
+        playerTwoRef = gameRef.child('player1/online');
 
-    showPlayerTwoWon();
-};
+        playerOneRef.child('Loses').transaction(function (dataLoseSnapshot) {
+            dataLoseSnapshot = player_one_loses;
+            return dataLoseSnapshot;
+        });
 
-var showPlayerOneWon = function () {
-    var p1ChoiceTag = $("<h4>");
-    p1ChoiceTag.text("Player One, You Choose ");
-    p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
-    $('#player-one-choice').append(p1ChoiceTag);
+        playerTwoRef.child('Wins').transaction(function (dataWinSnapshot) {
+            dataWinSnapshot = player_two_wins;
+            return dataWinSnapshot;
+        });
 
-    var p2ChoiceTag = $("<h4>");
-    p2ChoiceTag.text("Player Two, You choose ");
-    p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
-    $('#player-two-choice').append(p2ChoiceTag);
+        showPlayerTwoWon();
+    };
 
-    var winnerTag = $("<h4>");
-    winnerTag.text("The Winner is Player One!");
-    $('#winner').append(winnerTag);
+    var showPlayerOneWon = function () {
+        var p1ChoiceTag = $("<h4>");
+        p1ChoiceTag.text("Player One, You Choose ");
+        p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
+        $('#player-one-choice').append(p1ChoiceTag);
 
-    //setTimeout Function to remove 
-    setTimeout(function () {
-        $('#player-one-choice').empty();
-        $('#player-two-choice').empty();
-        $('#winner').empty();
-        reStartGame();
-    }, 3000);
-};
+        var p2ChoiceTag = $("<h4>");
+        p2ChoiceTag.text("Player Two, You choose ");
+        p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
+        $('#player-two-choice').append(p2ChoiceTag);
 
-var showPlayerTwoWon = function () {
-    var p1ChoiceTag = $("<h4>");
-    p1ChoiceTag.text("Player One, You Choose ");
-    p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
-    $('#player-one-choice').append(p1ChoiceTag);
+        var winnerTag = $("<h4>");
+        winnerTag.text("The Winner is Player One!");
+        $('#winner').append(winnerTag);
 
-    var p2ChoiceTag = $("<h4>");
-    p2ChoiceTag.text("Player Two, You choose ");
-    p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
-    $('#player-two-choice').append(p2ChoiceTag);
+        //setTimeout Function to remove 
+        setTimeout(function () {
+            $('#player-one-choice').empty();
+            $('#player-two-choice').empty();
+            $('#winner').empty();
+            reStartGame();
+        }, 3000);
+    };
 
-    var winnerTag = $("<h4>");
-    winnerTag.text("The Winner is Player Two!");
-    $('#winner').append(winnerTag);
+    var showPlayerTwoWon = function () {
+        var p1ChoiceTag = $("<h4>");
+        p1ChoiceTag.text("Player One, You Choose ");
+        p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
+        $('#player-one-choice').append(p1ChoiceTag);
 
-    //setTimeout Function to remove 
-    setTimeout(function () {
-        $('#player-one-choice').empty();
-        $('#player-two-choice').empty();
-        $('#winner').empty();
-        reStartGame();
-    }, 3000);
-};
+        var p2ChoiceTag = $("<h4>");
+        p2ChoiceTag.text("Player Two, You choose ");
+        p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
+        $('#player-two-choice').append(p2ChoiceTag);
 
-var showNoWinners = function () {
-    var p1ChoiceTag = $("<h4>");
-    p1ChoiceTag.text("Player One, You Choose ");
-    p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
-    $('#player-one-choice').append(p1ChoiceTag);
+        var winnerTag = $("<h4>");
+        winnerTag.text("The Winner is Player Two!");
+        $('#winner').append(winnerTag);
 
-    var p2ChoiceTag = $("<h4>");
-    p2ChoiceTag.text("Player Two, You choose ");
-    p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
-    $('#player-two-choice').append(p2ChoiceTag);
+        //setTimeout Function to remove 
+        setTimeout(function () {
+            $('#player-one-choice').empty();
+            $('#player-two-choice').empty();
+            $('#winner').empty();
+            reStartGame();
+        }, 3000);
+    };
 
-    var winnerTag = $("<h4>");
-    winnerTag.text("It is a tie... There are no winners!");
-    $('#winner').append(winnerTag);
+    var showNoWinners = function () {
+        var p1ChoiceTag = $("<h4>");
+        p1ChoiceTag.text("Player One, You Choose ");
+        p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
+        $('#player-one-choice').append(p1ChoiceTag);
 
-    //setTimeout Function to remove 
-    setTimeout(function () {
-        $('#player-one-choice').empty();
-        $('#player-two-choice').empty();
-        $('#winner').empty();
-        reStartGame();
-    }, 3000);
-};
+        var p2ChoiceTag = $("<h4>");
+        p2ChoiceTag.text("Player Two, You choose ");
+        p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
+        $('#player-two-choice').append(p2ChoiceTag);
 
-var reStartGame = function () {
-    $('#p1-rock-text').show();
-    $('#p1-paper-text').show();
-    $('#p1-scissor-text').show();
+        var winnerTag = $("<h4>");
+        winnerTag.text("It is a tie... There are no winners!");
+        $('#winner').append(winnerTag);
 
-    $('#p2-rock-text').show();
-    $('#p2-paper-text').show();
-    $('#p2-scissor-text').show();
+        //setTimeout Function to remove 
+        setTimeout(function () {
+            $('#player-one-choice').empty();
+            $('#player-two-choice').empty();
+            $('#winner').empty();
+            reStartGame();
+        }, 3000);
+    };
 
-    player_one_choice = "";
-    player_two_choice = "";
+    var reStartGame = function () {
+        $('#p1-rock-text').show();
+        $('#p1-paper-text').show();
+        $('#p1-scissor-text').show();
 
-    playerOneRef.child('Choice').transaction(function (dataOneSnapshot) {
-        dataOneSnapshot = player_one_choice;
-        return dataOneSnapshot;
-    });
+        $('#p2-rock-text').show();
+        $('#p2-paper-text').show();
+        $('#p2-scissor-text').show();
 
-    playerTwoRef.child('Choice').transaction(function (dataTwoSnapshot) {
-        dataTwoSnapshot = player_two_choice;
-        return dataTwoSnapshot;
-    });
+        player_one_choice = "";
+        player_two_choice = "";
 
-};
-        //********** CHAT **********/
+        playerOneRef.child('Choice').transaction(function (dataOneSnapshot) {
+            dataOneSnapshot = player_one_choice;
+            return dataOneSnapshot;
+        });
 
-        //submit chat text
+        playerTwoRef.child('Choice').transaction(function (dataTwoSnapshot) {
+            dataTwoSnapshot = player_two_choice;
+            return dataTwoSnapshot;
+        });
 
+    };
+    //********** CHAT **********/
+
+    //submit chat text
+    var showChats = function (snapshot) {
+        var chatMsg = snapshot.val();
+        if (Date.now() - chatMsg.timestamp < 1800000) {
+            var messageDiv = $('<div class="message">');
+            messageDiv.html('<span class="sender">' + chatMsg.sender + '</span>: ' + chatMsg.message);
+            $('#chatbox').append(messageDiv);
+        };
+    };
+
+    $('#chat-btn').on('click', function () {
+        var msg = $('#message');
+        var chatObj = {
+            message: msg.val(),
+            sender: playerName,
+            timestamp: firebase.database.ServerValue.TIMESTAMP
+        };
+
+        gameRef.child('chat').push(chatObj);
         //clear chat input
+        msg.val("");
 
-        //chat database functionality (how long?)
-
-
-
-}); //end of document
+        return false;
+    });
+    //chat database functionality (how long?)
+    gameRef.child('chat').on('child_added', function (snapshot) {
+        if (snapshot.val()) {
+            showChats(snapshot);
+        };
+    
+});//end of document
