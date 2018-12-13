@@ -3,6 +3,22 @@ $(document).ready(function () {
     gameRef = firebase.database().ref().child('Players');
 
     //Initialize Variables
+    var numPlayers = 2;
+    var playerName = "";
+    var playerWins = 0;
+    var playerLoses = 0;
+    var playerChoice = "";
+    var playingState = "";
+
+    var player_one_name = "";
+    var player_one_wins = 0;
+    var player_one_loses = 0;
+    var player_one_choice = "";
+
+    var player_two_name = "";
+    var player_two_wins = 0;
+    var player_two_loses = 0;
+    var player_two_choice = "";
 
     //How to join game? 
     

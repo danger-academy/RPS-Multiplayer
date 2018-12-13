@@ -1,41 +1,126 @@
 <!DOCTYPE html>
-<html lang="en-US">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-		<title>RPS-Multiplayer</title>
-    
-		<!-- Reset Link -->
-		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+<html lang="en-us">
 
-		<!-- CSS Link -->
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RPS-Multiplayer</title>
+	
+	<!-- Reset Link -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 
-		<!-- Google Fonts -->
+	<!-- CSS Link -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-		<!-- BOOTSTRAP -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-	</head>
+	<!-- Google Fonts -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
 
-	<body>
-    
-    <!-- CONTENT DIV-->
-		<div class="container">
-			<div class="well well-lg">Rock Paper Scissors</div>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-    </div>
+<body>
+	<div class="container">
+		<div class="well well-lg">
+			Rock! Paper! Scissors!
+		</div>
 
-		<!-- FIREBASE -->
-		
-		<!-- JQUERY -->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
-  
-		<!-- JAVASCRIPT -->
-	    <script src="assets/javascript/logic.js" type="text/javascript"></script>
-  
-	</body>
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6">
+				<!-- Form -->
+				<form id="target">
+					<input type="text" id="user" placeholder="Enter Name">
+					<input type="submit" id="submit-btn" value="Submit">
+
+						</div id="render-name"></div>
+				</form>
+
+			</div>
+		</div> <!-- end row -->
+
+	<div class="row">
+		<div id="main-section">
+			<div class="col-xs-4">
+				<div class="panel panel-default">
+					<div class="panel-body id=right-section">
+						<h3 id="player-one-text">Waiting for Player 1</h3>
+						<div id="p1-name-text"></div>
+						<div id="p1-rock-text"></div>
+						<div id="p1-paper-text"></div>
+						<div id="p1-scissor-text"></div>
+						<div id="p1-wins-text"></div>
+						<div id="p1-loses-text"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div id="disconnect-text"></div>
+						<div id="player-one-choice"></div>
+						<div id="player-two-choice"></div>
+						<div id="winner"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="panel panel-default">
+					<div class="panel-body id=left-section">
+						<h3 id="player-two-text">Waiting for Player 2</h3>
+						<div id="p2-name-text"></div>
+						<div id="p2-rock-text"></div>
+						<div id="p2-paper-text"></div>
+						<div id="p2-scissor-text"></div>
+						<div id="p2-wins-text"></div>
+						<div id="p2-loses-text"></div>
+					</div>
+				</div>
+			</div>
+
+		</div> <!-- end row -->
+
+		<div class="row">
+			<div class="col-xs-offset-2 col-xs-8 col-xs-offset-2">
+				<div id="chatbox">
+					
+				</div>
+			</div>
+			<div class="col-xs-offset-2 col-xs-8">
+				<div class="input-group">
+					<span class="input-group-addon">Comment</span>
+					<input id="message" type="text" class="form-control" name="message" placeholder="Message here...">
+				</div>
+			</div>
+			<div class="col-xs-2">
+				<button type="submit" class="btn btn-default" id="chat-btn">Submit</button>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+			<script>
+				// Initialize Firebase
+				var config = {
+					apiKey: "AIzaSyAXh85CdacrSeiSR44PnIYWM-RXz44OK-s",
+					authDomain: "rps-multiplayer-28047.firebaseapp.com",
+					databaseURL: "https://rps-multiplayer-28047.firebaseio.com",
+					projectId: "rps-multiplayer-28047",
+					storageBucket: "rps-multiplayer-28047.appspot.com",
+					messagingSenderId: "972543378957"
+				};
+				firebase.initializeApp(config);
+			</script>
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+
+	<!-- Javascript -->
+	<script src="assets/javascript/logic.js" type="text/javascript"></script>
+
+</body>
+
 </html>
