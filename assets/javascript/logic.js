@@ -325,60 +325,196 @@ $(document).ready(function () {
     // determine possible outcomes of RPS choices (p1 win, p2 win, tie)
     var calculateWinner = function () {
         //Player One Wins and Player Two Loses
-        if(player_one_choice === "Rock" && player_two_choice === "Scissor"){
+        if (player_one_choice === "Rock" && player_two_choice === "Scissor") {
             player_one_wins++;
             player_two_loses++;
             playerOneWins();
-         }; 
+        };
         //Player One Loses and Player Two Wins
-        if(player_one_choice === "Rock" && player_two_choice === "Paper"){
+        if (player_one_choice === "Rock" && player_two_choice === "Paper") {
             player_one_loses++;
             player_two_wins++;
             playerTwoWins();
-         }; 
+        };
         //No one wins 
-        if(player_one_choice === "Rock" && player_two_choice === "Rock"){
+        if (player_one_choice === "Rock" && player_two_choice === "Rock") {
             showNoWinners();
-         }; 
+        };
         //Player One Wins and Player Two Loses
-        if(player_one_choice === "Paper" && player_two_choice === "Rock"){
+        if (player_one_choice === "Paper" && player_two_choice === "Rock") {
             player_one_wins++;
             player_two_loses++;
             playerOneWins();
-         };  
+        };
         //No one wins... 
-        if(player_one_choice === "Paper" && player_two_choice === "Paper"){
+        if (player_one_choice === "Paper" && player_two_choice === "Paper") {
             showNoWinners();
-         };  
+        };
         //Player One Loses and Player Two Wins
-        if(player_one_choice === "Paper" && player_two_choice === "Scissor"){
+        if (player_one_choice === "Paper" && player_two_choice === "Scissor") {
             player_one_loses++;
             player_two_wins++;
             playerTwoWins();
-         }; 
+        };
         //No one wins... 
-        if(player_one_choice === "Scissor" && player_two_choice === "Scissor"){
+        if (player_one_choice === "Scissor" && player_two_choice === "Scissor") {
             showNoWinners();
-         }; 
+        };
         //Player One Wins and Player Two Loses
-        if(player_one_choice === "Scissor" && player_two_choice === "Paper"){
+        if (player_one_choice === "Scissor" && player_two_choice === "Paper") {
             player_one_wins++;
             player_two_loses++;
             playerOneWins();
-        }; 
+        };
         //Player One Loses and Player Two Wins
-        if(player_one_choice === "Scissor" && player_two_choice === "Rock"){
+        if (player_one_choice === "Scissor" && player_two_choice === "Rock") {
             player_one_loses++;
             player_two_wins++;
             playerTwoWins();
-        }; 
-         
+        };
+
     };
-        //setTimeout Function to remove data?
+    if (player_one_choice === "Scissor" && player_two_choice === "Rock") {
+        //Player One Loses and Player Two Wins
+        player_one_loses++;
+        player_two_wins++;
+        playerTwoWins();
+    };
 
-        //restart game
+};
 
+// display win-lose results
+var playerOneWins = function () {
+    
+    playerOneRef = gameRef.child('player0/online');
+    playerTwoRef = gameRef.child('player1/online');
 
+    playerOneRef.child('Wins').transaction(function (dataWinSnapshot) {
+        dataWinSnapshot = player_one_wins;
+        return dataWinSnapshot;
+    });
+
+    playerTwoRef.child('Loses').transaction(function (dataLoseSnapshot) {
+        dataLoseSnapshot = player_two_loses;
+        return dataLoseSnapshot;
+    });
+
+    showPlayerOneWon();
+};
+
+var playerTwoWins = function () {
+    
+    playerOneRef = gameRef.child('player0/online');
+    playerTwoRef = gameRef.child('player1/online');
+
+    playerOneRef.child('Loses').transaction(function (dataLoseSnapshot) {
+        dataLoseSnapshot = player_one_loses;
+        return dataLoseSnapshot;
+    });
+
+    playerTwoRef.child('Wins').transaction(function (dataWinSnapshot) {
+        dataWinSnapshot = player_two_wins;
+        return dataWinSnapshot;
+    });
+
+    showPlayerTwoWon();
+};
+
+var showPlayerOneWon = function () {
+    var p1ChoiceTag = $("<h4>");
+    p1ChoiceTag.text("Player One, You Choose ");
+    p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
+    $('#player-one-choice').append(p1ChoiceTag);
+
+    var p2ChoiceTag = $("<h4>");
+    p2ChoiceTag.text("Player Two, You choose ");
+    p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
+    $('#player-two-choice').append(p2ChoiceTag);
+
+    var winnerTag = $("<h4>");
+    winnerTag.text("The Winner is Player One!");
+    $('#winner').append(winnerTag);
+
+    //setTimeout Function to remove 
+    setTimeout(function () {
+        $('#player-one-choice').empty();
+        $('#player-two-choice').empty();
+        $('#winner').empty();
+        reStartGame();
+    }, 3000);
+};
+
+var showPlayerTwoWon = function () {
+    var p1ChoiceTag = $("<h4>");
+    p1ChoiceTag.text("Player One, You Choose ");
+    p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
+    $('#player-one-choice').append(p1ChoiceTag);
+
+    var p2ChoiceTag = $("<h4>");
+    p2ChoiceTag.text("Player Two, You choose ");
+    p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
+    $('#player-two-choice').append(p2ChoiceTag);
+
+    var winnerTag = $("<h4>");
+    winnerTag.text("The Winner is Player Two!");
+    $('#winner').append(winnerTag);
+
+    //setTimeout Function to remove 
+    setTimeout(function () {
+        $('#player-one-choice').empty();
+        $('#player-two-choice').empty();
+        $('#winner').empty();
+        reStartGame();
+    }, 3000);
+};
+
+var showNoWinners = function () {
+    var p1ChoiceTag = $("<h4>");
+    p1ChoiceTag.text("Player One, You Choose ");
+    p1ChoiceTag.append("<span class='p1ChoiceTag'>" + player_one_choice + '</span>')
+    $('#player-one-choice').append(p1ChoiceTag);
+
+    var p2ChoiceTag = $("<h4>");
+    p2ChoiceTag.text("Player Two, You choose ");
+    p2ChoiceTag.append("<span class='p2ChoiceTag'>" + player_two_choice + '</span>')
+    $('#player-two-choice').append(p2ChoiceTag);
+
+    var winnerTag = $("<h4>");
+    winnerTag.text("It is a tie... There are no winners!");
+    $('#winner').append(winnerTag);
+
+    //setTimeout Function to remove 
+    setTimeout(function () {
+        $('#player-one-choice').empty();
+        $('#player-two-choice').empty();
+        $('#winner').empty();
+        reStartGame();
+    }, 3000);
+};
+
+var reStartGame = function () {
+    $('#p1-rock-text').show();
+    $('#p1-paper-text').show();
+    $('#p1-scissor-text').show();
+
+    $('#p2-rock-text').show();
+    $('#p2-paper-text').show();
+    $('#p2-scissor-text').show();
+
+    player_one_choice = "";
+    player_two_choice = "";
+
+    playerOneRef.child('Choice').transaction(function (dataOneSnapshot) {
+        dataOneSnapshot = player_one_choice;
+        return dataOneSnapshot;
+    });
+
+    playerTwoRef.child('Choice').transaction(function (dataTwoSnapshot) {
+        dataTwoSnapshot = player_two_choice;
+        return dataTwoSnapshot;
+    });
+
+};
         //********** CHAT **********/
 
         //submit chat text
@@ -389,4 +525,4 @@ $(document).ready(function () {
 
 
 
-    }); //end of document
+}); //end of document
