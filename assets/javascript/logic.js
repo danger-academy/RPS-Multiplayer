@@ -43,18 +43,23 @@ $(document).ready(function () {
     });
 
     var waitingToJoin = function () {
-        // Listen on "online" location for player 0 
-        gameRef.child("player0/online").on("value", function (snapshot) {
+        
+        // Listen on "online" location for player 0 (display as player One)
+        gameRef.child("player0/online").on("value", function (snapshot){
             var value = snapshot.val();
-            if (value === null && playingState === PlayingState.Watching) {
+            if(value === null && playingState === PlayingState.Watching) {
                 tryingToJoin(0);
             };
         });
 
-        // Listen on "online" location for player 0 (display as player One)
-
         // Listen on "online" location for player 1 (display as player Two)
-
+        this.gameRef.child("player1/online").on("value", function (snapshot){
+            var value = snapshot.val();
+            if(value === null && playingState === PlayingState.Watching) {
+                tryingToJoin(1);
+            };
+        });
+    };
         // Set player to join game
 
 
