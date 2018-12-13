@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     var player_one_name = "";
     var player_one_wins = 0;
-    var player_one_loses = 0;
+    var player_one_loss = 0;
     var player_one_choice = "";
 
     var player_two_name = "";
@@ -30,7 +30,7 @@ $(document).ready(function () {
     PlayerChoice = {
         Rock: "Rock!",
         Paper: "Paper!",
-        Scissor: "Scissor!"
+        Scissor: "Scissors!"
     }
 
 
@@ -97,22 +97,53 @@ $(document).ready(function () {
         gameRef.child("player1").child("online").onDisconnect().remove();    
 
         //Control the players
+        playerOneRef = gameRef.child('player0/online');
+        playerTwoRef = gameRef.child('player1/online');
 
+         playerOneRef.on("value", function(playerOneSnapshot){
+            if(playerOneSnapshot.val() !== null){
+                 
+                player_one_name = playerOneSnapshot.val().Name;
+                player_one_wins =  playerOneSnapshot.val().Wins;
+                player_one_loss = playerOneSnapshot.val().Loses;
+                player_one_choice = playerOneSnapshot.val().Choice;
+                
+                $("#submit-btn").remove();
+                $("#user").remove();
+                $("#player-one-text").empty();
+                $("#player-one-text").append("Welcome " + player_one_name + " You Are Player One");
 
         //*****Create a div to display info for Player One*****//
-
         //div to display player one name
-
+        var plNameText = $("<h4>");
+            plNameText.text(player_one_name);
+            $("#p1-name-text").html(plNameText );
         //div to display player one rock text
-
+        var plRockText = $("<a href='#'>");
+            plRockText.text("ROCK!");
+            $("#p1-rock-text").html(plRockText);
         //div to display player one paper text
-
+        var p1PaperText = $("<a href='#'>");
+            p1PaperText.text("PAPER!");
+            $("#p1-paper-text").html(p1PaperText);
         //div to display player on scissor text
-
+        var p1ScissorText = $("<a href='#'>");
+            p1ScissorText.text("SCISSORS!");
+            $("#p1-scissor-text").html(p1ScissorText);
         //div to display player one wins
-
+        var p1NumWins = $("<h4>");
+            p1NumWins.text("Wins: ");
+            p1NumWins.append("<span class='p1Wins'>" + player_one_wins +'</span>');
+            $("#p1-wins-text").html(p1NumWins);
         //div to display player one loses
+        var p1NumLoss = $("<h4>");
+            p1NumLoss.text("Losses: ");
+            p1NumLoss.append("<span class='p1Loses'>" + player_one_loss +'</span>');
+            $("#p1-loses-text").html(p1NumLoss);
 
+        };
+    });
+    
         //*****Create the div to display info for Player Two*****//
 
         //div to display Player Two Name
