@@ -188,9 +188,44 @@ $(document).ready(function () {
     });
 }
 
-        //*****Player Click Events*****//
+         //*****Player One Click Events*****//
+         $('#p1-rock-text').on("click", function(e){
+            e.preventDefault();
+            player_one_choice = PlayerChoice.Rock;
+            startPlaying();
+        });
 
+        $('#p1-paper-text').on("click", function(e){
+            e.preventDefault();
+            player_one_choice = PlayerChoice.Paper;
+            startPlaying();
+        });
 
+        $('#p1-scissor-text').on("click", function(e){
+            e.preventDefault();
+            player_one_choice = PlayerChoice.Scissor;
+            startPlaying();
+        });
+
+        //*****Player Two Click Event*****//
+        $('#p2-rock-text').on("click", function(e){
+            e.preventDefault();
+            player_two_choice = PlayerChoice.Rock;
+            startPlaying();
+        }); 
+
+        $('#p2-paper-text').on("click", function(e){
+            e.preventDefault();
+            player_two_choice = PlayerChoice.Paper;
+            startPlaying();
+        }); 
+
+        $('#p2-scissor-text').on("click", function(e){
+            e.preventDefault();
+            player_two_choice = PlayerChoice.Scissor;
+            startPlaying();
+        }); 
+    
         //describe player options
 
 
